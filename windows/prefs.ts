@@ -656,9 +656,11 @@ addEventListener("DOMContentLoaded", async () => {
     "click",
     async () => {
       await saveCustomLocale(undefined);
-      runtime.reload();
-    }
-  );
+      if (confirm(
+        "Cleared your custom translation\nWant to reload the extension now?")) {
+        runtime.reload();
+      }
+    });
   customLocale.addEventListener("change", async () => {
     if (!customLocale.files || !customLocale.files.length) {
       return;

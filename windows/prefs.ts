@@ -568,15 +568,12 @@ addEventListener("DOMContentLoaded", async () => {
   await localize(document.documentElement);
 
   // General
-  new BoolPref("pref-manager-in-popup", "manager-in-popup");
   new BoolPref("pref-queue-notification", "queue-notification");
   new BoolPref("pref-finish-notification", "finish-notification");
   // XXX: #125
-  new BoolPref("pref-hide-context", "hide-context");
   new BoolPref("pref-open-manager-on-queue", "open-manager-on-queue");
   new BoolPref("pref-text-links", "text-links");
   new BoolPref("pref-add-paused", "add-paused");
-  new BoolPref("pref-show-urls", "show-urls");
   new BoolPref("pref-remove-missing-on-init", "remove-missing-on-init");
   new OptionPref("pref-button-type", "button-type");
   new OptionPref("pref-theme", "theme");

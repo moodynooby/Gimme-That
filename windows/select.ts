@@ -7,7 +7,7 @@ import { ContextMenu } from "./contextmenu";
 import { iconForPath } from "../lib/windowutils";
 import { _, localize, locale } from "../lib/i18n";
 import { Prefs } from "../lib/prefs";
-import {FASTFILTER } from "../lib/recentlist";
+import { FASTFILTER } from "../lib/recentlist";
 import { WindowState } from "./windowstate";
 import { Dropdown } from "./dropdown";
 import { Keys } from "./keys";
@@ -24,7 +24,7 @@ import { BaseItem } from "../lib/item";
 import { ItemDelta } from "../lib/select";
 // eslint-disable-next-line no-unused-vars
 import { TableConfig } from "../uikit/lib/config";
-import { parsePath, validateSubFolder as validateSubfolder } from "../lib/util";
+import { parsePath } from "../lib/util";
 import "./theme";
 
 const PORT: RawPort = runtime.connect(null, { name: "select" });
@@ -46,7 +46,7 @@ let Table: SelectionTable;
 let FastFilter: Dropdown;
 
 
-type DELTAS = {deltaLinks: ItemDelta[]; deltaMedia: ItemDelta[]};
+type DELTAS = { deltaLinks: ItemDelta[]; deltaMedia: ItemDelta[] };
 
 interface BaseMatchedItem extends BaseItem {
   backIdx: number;
@@ -106,8 +106,8 @@ class CheckClasser extends Map<string, string> {
 
   constructor(numClasses: number) {
     super();
-    this.gen = (function *() {
-      for (;;) {
+    this.gen = (function* () {
+      for (; ;) {
         for (let c = 0; c < numClasses; ++c) {
           yield `filter-${c + 1}`;
         }
@@ -163,7 +163,7 @@ class ItemCollection {
 
   get checkedBackIndexes() {
     const rv: number[] = [];
-    this.items.forEach(function(item) {
+    this.items.forEach(function (item) {
       if (item.matched && item.matched !== "unmanual") {
         rv.push(item.backIdx);
       }
@@ -227,8 +227,8 @@ class SelectionTable extends VirtualTable {
   keyfns: Map<string, KeyFn>;
 
   constructor(
-      treeConfig: TableConfig | null, type: string,
-      links: BaseMatchedItem[], media: BaseMatchedItem[]) {
+    treeConfig: TableConfig | null, type: string,
+    links: BaseMatchedItem[], media: BaseMatchedItem[]) {
     if (type === "links" && !links.length) {
       type = "media";
     }
@@ -343,7 +343,7 @@ class SelectionTable extends VirtualTable {
       return true;
     });
 
-    this.contextMenu.on("ctx-mask", async() => {
+    this.contextMenu.on("ctx-mask", async () => {
       if (this.selection.empty) {
         return;
       }
@@ -373,7 +373,7 @@ class SelectionTable extends VirtualTable {
       }
     });
 
-    this.contextMenu.on("ctx-referrer", async() => {
+    this.contextMenu.on("ctx-referrer", async () => {
       if (this.selection.empty) {
         return;
       }
@@ -452,11 +452,11 @@ class SelectionTable extends VirtualTable {
       }
       let ns;
       switch (state) {
-      case "toggle":
-        ns = matched(item) ? "unmanual" : "manual";
-        break;
-      default:
-        ns = state;
+        case "toggle":
+          ns = matched(item) ? "unmanual" : "manual";
+          break;
+        default:
+          ns = state;
       }
       item.matched = ns;
       this.invalidateRow(rowid);
@@ -527,7 +527,7 @@ class SelectionTable extends VirtualTable {
   applyDeltaTo(delta: ItemDelta[], items: ItemCollection) {
     const active = items === this.items;
     for (const d of delta) {
-      const {idx = -1, matched = null} = d;
+      const { idx = -1, matched = null } = d;
       if (idx < 0) {
         continue;
       }
@@ -550,7 +550,7 @@ class SelectionTable extends VirtualTable {
     }
   }
 
-  applyDeltas({deltaLinks = [], deltaMedia = []}: DELTAS) {
+  applyDeltas({ deltaLinks = [], deltaMedia = [] }: DELTAS) {
     this.applyDeltaTo(deltaLinks, this.links);
     this.applyDeltaTo(deltaMedia, this.media);
     this.updateStatus();
@@ -602,10 +602,10 @@ class SelectionTable extends VirtualTable {
 
   getCellType(rowid: number, colid: number) {
     switch (colid) {
-    case COL_CHECK:
-      return CellTypes.TYPE_CHECK;
-    default:
-      return CellTypes.TYPE_TEXT;
+      case COL_CHECK:
+        return CellTypes.TYPE_CHECK;
+      default:
+        return CellTypes.TYPE_TEXT;
     }
   }
 
@@ -646,26 +646,26 @@ class SelectionTable extends VirtualTable {
 
   getCellText(rowid: number, colid: number) {
     switch (colid) {
-    case COL_DOWNLOAD:
-      return this.getDownloadText(rowid);
+      case COL_DOWNLOAD:
+        return this.getDownloadText(rowid);
 
-    case COL_TITLE:
-      return this.getText("title", rowid);
+      case COL_TITLE:
+        return this.getText("title", rowid);
 
-    case COL_DESC:
-      return this.getText("description", rowid);
+      case COL_DESC:
+        return this.getText("description", rowid);
 
-    case COL_REFERRER:
-      return this.getText("usableReferrer", rowid);
+      case COL_REFERRER:
+        return this.getText("usableReferrer", rowid);
 
-    case COL_MASK:
-      return this.getMaskText(rowid);
+      case COL_MASK:
+        return this.getMaskText(rowid);
 
-    case COL_FILE_EXTENSION:
-      return this.getFileExtension(rowid);
+      case COL_FILE_EXTENSION:
+        return this.getFileExtension(rowid);
 
-    default:
-      return "";
+      default:
+        return "";
     }
   }
 
@@ -787,7 +787,7 @@ class Filter {
 }
 
 function setFiltersInternal(
-    desc: string, filters: any[], active: Set<string>) {
+  desc: string, filters: any[], active: Set<string>) {
   const container = $(desc);
   container.textContent = "";
   for (let filter of filters) {
@@ -836,7 +836,7 @@ addEventListener("DOMContentLoaded", function dom() {
 
   localize(document.documentElement);
 
- 
+
   $("#statusPrefs").addEventListener("click", () => {
     PORT.postMessage({
       msg: "prefs",
@@ -866,28 +866,28 @@ addEventListener("DOMContentLoaded", function dom() {
     try {
       await LOADED;
       switch (msg.msg) {
-      case "items": {
-        const {type = "links", links = [], media = []} = msg.data;
-        const treeConfig = JSON.parse(
-          await Prefs.get("tree-config-select", "{}"));
-        requestAnimationFrame(() => {
-          Table = new SelectionTable(treeConfig, type, links, media);
-        });
-        return;
-      }
+        case "items": {
+          const { type = "links", links = [], media = [] } = msg.data;
+          const treeConfig = JSON.parse(
+            await Prefs.get("tree-config-select", "{}"));
+          requestAnimationFrame(() => {
+            Table = new SelectionTable(treeConfig, type, links, media);
+          });
+          return;
+        }
 
-      case "filters":
-        setFilters(msg.data);
-        return;
+        case "filters":
+          setFilters(msg.data);
+          return;
 
-      case "item-delta":
-        requestAnimationFrame(() => {
-          Table.applyDeltas(msg.data);
-        });
-        return;
+        case "item-delta":
+          requestAnimationFrame(() => {
+            Table.applyDeltas(msg.data);
+          });
+          return;
 
-      default:
-        throw Error("Unhandled message");
+        default:
+          throw Error("Unhandled message");
       }
     }
     catch (ex) {
@@ -906,7 +906,7 @@ addEventListener("contextmenu", event => {
 });
 
 
-addEventListener("beforeunload", function() {
+addEventListener("beforeunload", function () {
   PORT.disconnect();
 });
 

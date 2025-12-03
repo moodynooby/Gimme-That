@@ -1,15 +1,11 @@
 {
   "manifest_version": 2,
   "name": "Gimme That!",
-  "version": "5",
-
+  "version": "5.5",
   "description": "__MSG_extensionDescription__",
   "author": "Manas",
-
   "default_locale": "en",
-
   "content_security_policy": "script-src 'self'; style-src 'self' 'unsafe-inline'; img-src data: blob: 'self'; connect-src data: blob: http: https: 'self'; default-src 'self'",
-
   "icons": {
     "32": "style/icon32.png",
     "128": "style/icon128.png"
@@ -30,14 +26,12 @@
     "webRequest",
     "webRequestBlocking"
   ],
-
   "background": {
     "scripts": [
       "bundles/common.js",
       "bundles/background.js"
     ]
   },
-
   "browser_action": {
     "browser_style": true,
     "default_popup": "windows/popup.html",
@@ -47,19 +41,18 @@
     },
     "default_title": "Gimme That!"
   },
-
   "options_ui": {
     "open_in_tab": true,
     "page": "windows/prefs.html"
   },
-
   "browser_specific_settings": {
     "gecko": {
       "id": "{036a55b4-5e72-4d05-a06c-cba2d2c2135b}",
-            "data_collection_permissions": {
-        "required": ["none"]
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
       },
-
       "strict_min_version": "67.0"
     }
   }

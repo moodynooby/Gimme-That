@@ -9,7 +9,7 @@ body {
   overflow: hidden;
 }
 
-body > * {
+body>* {
   flex: 0 0 auto;
 }
 
@@ -42,64 +42,83 @@ body > * {
 }
 
 .filter-manual {
-  background-color: #FFFFB3 !important;
+  text-decoration: underline #FFFFB3 solid 3px !important;
 }
+
 .filter-manual.virtualtable-selected {
-  background-color: #FFFF80 !important;
+  text-decoration: underline #FFFF80 solid 3px !important;
 }
+
 .filter-1 {
-  background-color: #FFE8BB !important;
+  text-decoration: underline #FFE8BB solid 3px !important;
 }
+
 .filter-1.virtualtable-selected {
-  background-color: #FFD88A !important;
+  text-decoration: underline #FFD88A solid 3px !important;
 }
+
 .filter-2 {
-  background-color: #ECFFB3 !important;
+  text-decoration: underline #ECFFB3 solid 3px !important;
 }
+
 .filter-2.virtualtable-selected {
-  background-color: #DFFF80 !important;
+  text-decoration: underline #DFFF80 solid 3px !important;
 }
+
 .filter-3 {
-  background-color: #ECE8FF !important;
+  text-decoration: underline #ECE8FF solid 3px !important;
 }
+
 .filter-3.virtualtable-selected {
-  background-color: #D5CCFF !important;
+  text-decoration: underline #D5CCFF solid 3px !important;
 }
+
 .filter-4 {
-  background-color: #DDF3FF !important;
+  text-decoration: underline #DDF3FF solid 3px !important;
 }
+
 .filter-4.virtualtable-selected {
-  background-color: #C2EAFF !important;
+  text-decoration: underline #C2EAFF solid 3px !important;
 }
+
 .filter-5 {
-  background-color: #FDE8FF !important;
+  text-decoration: underline #FDE8FF solid 3px !important;
 }
+
 .filter-5.virtualtable-selected {
-  background-color: #FBCCFF !important;
+  text-decoration: underline #FBCCFF solid 3px !important;
 }
+
 .filter-6 {
-  background-color: #DDFFF4;
+  text-decoration: underline #DDFFF4 solid 3px !important;
 }
+
 .filter-6.virtualtable-selected {
-  background-color: #A8FFE4 !important;
+  text-decoration: underline #A8FFE4 solid 3px !important;
 }
+
 .filter-7 {
-  background-color: #FEFFAF !important;
+  text-decoration: underline #FEFFAF solid 3px !important;
 }
+
 .filter-7.virtualtable-selected {
-  background-color: #FDFF7A !important;
+  text-decoration: underline #FDFF7A solid 3px !important;
 }
+
 .filter-8 {
-  background-color: #FFF0B3 !important;
+  text-decoration: underline #FFF0B3 solid 3px !important;
 }
+
 .filter-8.virtualtable-selected {
-  background-color: #FFE680 !important;
+  text-decoration: underline #FFE680 solid 3px !important;
 }
+
 .filter-fast {
-  background-color: #FFDBDB !important;
+  text-decoration: underline #FFDBDB solid 3px !important;
 }
+
 .filter-fast.virtualtable-selected {
-  background-color: #DFC2C2 !important;
+  text-decoration: underline #DFC2C2 solid 3px !important;
 }
 
 #tabs {
@@ -162,17 +181,19 @@ body > * {
   flex-direction: column;
   min-width: 0;
 }
+
 .filters-container {
   display: none;
   grid-template-columns: repeat(3, 1fr);
   grid-column-gap: 1em;
   grid-row-gap: 1ex;
 }
+
 .filters-container.active {
   display: grid;
 }
 
-.filters-container > label {
+.filters-container>label {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -183,6 +204,7 @@ body > * {
 .virtualtable-column[data-sortdir="asc"] .virtualtable-column-icon:before {
   content: '▼';
 }
+
 .virtualtable-column[data-sortdir="desc"] .virtualtable-column-icon:before {
   content: '▲';
 }
@@ -190,9 +212,11 @@ body > * {
 #ctx-check-selected .icon-done {
   color: var(--done-color);
 }
+
 #ctx-check-selected:hover .icon-done {
   color: var(--running-color);
 }
+
 #ctx-toggle-selected .icon-unchecked {
   color: lightgray;
 }

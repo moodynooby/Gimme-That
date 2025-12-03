@@ -13,7 +13,7 @@
     "stats": "cloc --vcs=git --exclude-lang=Markdown,SVG",
     "test": "LANG=en mocha -r ts-node/register -r chai/register-expect.js tests",
     "watch": "webpack --watch",
-    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../GT.p --keep-profile-changes --firefox=\"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\""
+    "webext": "web-ext run -i 'lib/*' -i '**/node_modules/**' --bc -p ../GT.p --keep-profile-changes --firefox=\"C:\\Program Files\\Mozilla Firefox\\firefox.exe\""
   },
   "author": "Manas Doshi",
   "license": "GPL-2.0",

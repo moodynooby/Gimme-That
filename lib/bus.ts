@@ -1,7 +1,7 @@
 "use strict";
 // License: MIT
 
-import { EventEmitter } from "./events";
+import { EventEmitter } from "../uikit/lib/events";
 // eslint-disable-next-line no-unused-vars
 import {runtime, tabs, RawPort, MessageSender} from "./browser";
 

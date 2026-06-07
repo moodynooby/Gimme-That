@@ -16,7 +16,8 @@ body {
   margin-top: 1.5em;
   margin-bottom: 3.5em;
   min-height: 70px;
-  background: transparent url(/style/icon64.png) no-repeat 32px 50%;
+  background: transparent url(/style/icon128.png) no-repeat 32px 50%;
+  background-size: 64px 64px;
   background-size: 64px 64px;
   padding-left: 128px;
 }

@@ -1,63 +1,34 @@
 "use strict";
 // License: MIT
 
-import { EventEmitter } from "../lib/events";
-import { debounce } from "../lib/util";
-
-const TIMEOUT_INPUT = 100;
-
-export class Dropdown extends EventEmitter {
-  container: HTMLDivElement;
-
-  input: HTMLInputElement;
-
-  select: HTMLSelectElement;
-
-  constructor(el: string, options: string[] = []) {
-    super();
-    let input = document.querySelector(el);
-    if (!input || !input.parentElement) {
-      throw new Error("Invalid input element");
-    }
-
-    this.container = document.createElement("div");
-    this.container.classList.add("dropdown");
-    if (input.id) {
-      this.container.id = `${input.id}-dropdown`;
-    }
-
-    input = input.parentElement.replaceChild(this.container, input);
-    this.input = input as HTMLInputElement;
-    this.container.appendChild(this.input);
-
-    this.select = document.createElement("select");
-    for (const option of options) {
-      const elem = document.createElement("option");
-      elem.setAttribute("value", elem.textContent = option);
-      this.select.appendChild(elem);
-    }
-    this.container.insertBefore(this.select, this.input);
-
-    this.select.addEventListener("change", () => {
-      this.input.value = this.select.value;
-      this.input.focus();
-      this.input.select();
-      this.emit("changed");
-    });
-    this.input.value = this.select.value;
-    this.input.addEventListener("change", () => {
-      this.emit("changed");
-    });
-    this.input.addEventListener("input", debounce(() => {
-      this.emit("changed");
-    }, TIMEOUT_INPUT));
+export function setupDatalist(inputId: string, options: string[]) {
+  const input = document.getElementById(inputId) as HTMLInputElement;
+  if (!input) {
+    throw new Error(`Invalid input id: ${inputId}`);
   }
 
-  get value() {
-    return this.input.value;
+  const listId = `${inputId}-list`;
+  const existing = document.getElementById(listId);
+  if (existing) {
+    existing.remove();
   }
 
-  set value(nv) {
-    this.input.value = nv || "";
+  const list = document.createElement("datalist");
+  list.id = listId;
+  for (const opt of options) {
+    const el = document.createElement("option");
+    el.value = opt;
+    list.appendChild(el);
   }
+  input.parentNode!.insertBefore(list, input.nextSibling);
+  input.setAttribute("list", listId);
+
+  return {
+    get value() { return input!.value; },
+    set value(v: string) { input!.value = v || ""; },
+    onchange(cb: () => void) {
+      input!.addEventListener("change", cb);
+      input!.addEventListener("input", cb);
+    },
+  };
 }

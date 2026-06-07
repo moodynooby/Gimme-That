@@ -11,7 +11,7 @@ import {
   // eslint-disable-next-line no-unused-vars
   MenuPosition,
 } from "../contextmenu";
-import {EventEmitter} from "../../lib/events";
+import {EventEmitter} from "../../uikit/lib/events";
 // eslint-disable-next-line no-unused-vars
 import {filters, Matcher, Filter} from "../../lib/filters";
 import {sort, defaultCompare, naturalCaseCompare} from "../../lib/sorting";

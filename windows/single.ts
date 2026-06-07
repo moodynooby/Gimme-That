@@ -3,13 +3,14 @@
 // License: MIT
 
 import ModalDialog from "../uikit/lib/modal";
+import Toast from "../uikit/lib/toast";
 import { _, localize } from "../lib/i18n";
 // eslint-disable-next-line no-unused-vars
 import { Item, BaseItem } from "../lib/item";
 import { MASK, SUBFOLDER } from "../lib/recentlist";
 import { BatchGenerator } from "../lib/batches";
 import { WindowState } from "./windowstate";
-import { Dropdown } from "./dropdown";
+import { setupDatalist } from "./dropdown";
 import { Keys } from "./keys";
 import { hookButton } from "../lib/manager/renamer";
 import { runtime } from "../lib/browser";
@@ -20,8 +21,8 @@ import "./theme";
 const PORT = runtime.connect(null, { name: "single" });
 
 let ITEM: BaseItem;
-let Mask: Dropdown;
-let Subfolder: Dropdown;
+let Mask: ReturnType<typeof setupDatalist>;
+let Subfolder: ReturnType<typeof setupDatalist>;
 
 class BatchModalDialog extends ModalDialog {
   private readonly gen: BatchGenerator;
@@ -90,12 +91,6 @@ function setItem(item: BaseItem) {
   }
 }
 
-function displayError(err: string) {
-  const not = $("#notification");
-  not.textContent = _(err);
-  not.style.display = "block";
-}
-
 async function downloadInternal(paused: boolean) {
   let usable = $<HTMLInputElement>("#URL").value.trim();
   let url;
@@ -108,7 +103,7 @@ async function downloadInternal(paused: boolean) {
       $<HTMLInputElement>("#URL").value = usable = `https://${usable}`;
     }
     catch (ex) {
-      return displayError("error.invalidURL");
+      return Toast.error(_("error.invalidURL"));
     }
   }
 
@@ -120,7 +115,7 @@ async function downloadInternal(paused: boolean) {
     referrer = usableReferrer ? new URL(usableReferrer).toString() : "";
   }
   catch (ex) {
-    return displayError("error.invalidReferrer");
+    return Toast.error(_("error.invalidReferrer"));
   }
 
   const fileName = $<HTMLInputElement>("#filename").value.trim();
@@ -128,7 +123,7 @@ async function downloadInternal(paused: boolean) {
   const description = $<HTMLInputElement>("#description").value.trim();
   const mask = Mask.value.trim();
   if (!mask) {
-    return displayError("error.invalidMask");
+    return Toast.error(_("error.invalidMask"));
   }
 
   const subfolder = Subfolder.value.trim();
@@ -216,8 +211,8 @@ function cancel() {
 async function init() {
   await localize(document.documentElement);
   await Promise.all([MASK.init(), SUBFOLDER.init()]);
-  Mask = new Dropdown("#mask", MASK.values);
-  Subfolder = new Dropdown("#subfolder", SUBFOLDER.values);
+  Mask = setupDatalist("mask", MASK.values);
+  Subfolder = setupDatalist("subfolder", SUBFOLDER.values);
 }
 
 addEventListener("DOMContentLoaded", async function dom() {

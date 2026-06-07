@@ -3,11 +3,11 @@
 
 import { runtime, notifications } from "./browser";
 
-import {EventEmitter} from "./events";
+import {EventEmitter} from "../uikit/lib/events";
 
 const DEFAULTS = {
   type: "basic",
-  iconUrl: runtime.getURL("/style/icon64.png"),
+  iconUrl: runtime.getURL("/style/icon128.png"),
   title: "Gimme That!",
   message: "message",
 };

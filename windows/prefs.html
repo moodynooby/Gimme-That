@@ -10,6 +10,7 @@
   <style>
     @import url("/uikit/css/virtualtable.css");
     @import url("/uikit/css/modal.css");
+    @import url("/uikit/css/toast.css");
     @import url("/style/prefs.css");
   </style>
   <title data-i18n="prefs.title">Manager</title>
@@ -25,7 +26,7 @@
   <input class="tab" type="radio" id="tabsel-network" name="tabs">
   <input class="tab" type="radio" id="tabsel-manager" name="tabs" checked>
 
-  <nav id="tabs" aria-role="tablist">
+  <nav id="tabs" role="tablist">
     <label id="tabel-general" for="tabsel-general" data-i18n="options-general">General</label>
     <label id="tabel-filters" for="tabsel-filters" data-i18n="options-filters">Filters</label>
     <label id="tabel-network" for="tabsel-network" data-i18n="options-network">Network</label>

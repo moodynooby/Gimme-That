@@ -14,6 +14,7 @@ import { filters } from "../lib/filters";
 import { Limits } from "../lib/manager/limits";
 // eslint-disable-next-line no-unused-vars
 import ModalDialog, { ModalButton } from "../uikit/lib/modal";
+import Toast from "../uikit/lib/toast";
 import { TYPE_LINK, TYPE_MEDIA } from "../lib/constants";
 import { iconForPath, visible } from "../lib/windowutils";
 import { VirtualTable } from "../uikit/lib/table";
@@ -586,11 +587,7 @@ addEventListener("DOMContentLoaded", async () => {
       }
       await Prefs.reset(k);
     }
-    await ModalDialog.inform(
-      _("information.title"),
-      _("reset-confirmations.done"),
-      _("ok")
-    );
+    Toast.info(_("reset-confirmations.done"));
   });
   $("#reset-layout").addEventListener("click", async () => {
     for (const k of Prefs) {
@@ -605,11 +602,7 @@ addEventListener("DOMContentLoaded", async () => {
       }
       await Prefs.reset(k);
     }
-    await ModalDialog.inform(
-      _("information.title"),
-      _("reset-layouts.done"),
-      _("ok")
-    );
+    Toast.info(_("reset-layouts.done"));
   });
 
   const langs = $<HTMLSelectElement>("#languages");
@@ -628,13 +621,14 @@ addEventListener("DOMContentLoaded", async () => {
     if (langs.value === currentLang) {
       return;
     }
-    // eslint-disable-next-line max-len
-    if (
-      confirm(
+    try {
+      await ModalDialog.confirm(
+        "Restart Required",
         "Changing the selected translation requires restarting the extension.\nDo you want to restart the extension now?"
-      )
-    ) {
+      );
       runtime.reload();
+    } catch {
+      // dismissed
     }
   });
 
@@ -656,9 +650,14 @@ addEventListener("DOMContentLoaded", async () => {
     "click",
     async () => {
       await saveCustomLocale(undefined);
-      if (confirm(
-        "Cleared your custom translation\nWant to reload the extension now?")) {
+      try {
+        await ModalDialog.confirm(
+          "Translation Cleared",
+          "Cleared your custom translation.\nWant to reload the extension now?"
+        );
         runtime.reload();
+      } catch {
+        // dismissed
       }
     });
   customLocale.addEventListener("change", async () => {
@@ -680,12 +679,22 @@ addEventListener("DOMContentLoaded", async () => {
       });
       await saveCustomLocale(text);
 
-      if (confirm("Imported your file.\nWant to reload the extension now?")) {
+      try {
+        await ModalDialog.confirm(
+          "Import Complete",
+          "Imported your file.\nWant to reload the extension now?"
+        );
         runtime.reload();
+      } catch {
+        // dismissed
       }
     } catch (ex) {
       console.error(ex);
-      alert(`Could not load your translation file:\n${ex.toString()}`);
+      await ModalDialog.inform(
+        "Error",
+        `Could not load your translation file:\n${ex.toString()}`,
+        "OK"
+      );
     }
   });
 });

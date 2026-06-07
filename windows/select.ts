@@ -3,13 +3,14 @@
 
 import { VirtualTable } from "../uikit/lib/table";
 import ModalDialog from "../uikit/lib/modal";
+import Toast from "../uikit/lib/toast";
 import { ContextMenu } from "./contextmenu";
 import { iconForPath } from "../lib/windowutils";
 import { _, localize, locale } from "../lib/i18n";
 import { Prefs } from "../lib/prefs";
 import { FASTFILTER } from "../lib/recentlist";
 import { WindowState } from "./windowstate";
-import { Dropdown } from "./dropdown";
+import { setupDatalist } from "./dropdown";
 import { Keys } from "./keys";
 import { Icons } from "./icons";
 import { sort, naturalCaseCompare } from "../lib/sorting";
@@ -43,7 +44,7 @@ const ICON_BASE_SIZE = 16;
 const NUM_FILTER_CLASSES = 8;
 
 let Table: SelectionTable;
-let FastFilter: Dropdown;
+let FastFilter: ReturnType<typeof setupDatalist>;
 
 
 type DELTAS = { deltaLinks: ItemDelta[]; deltaMedia: ItemDelta[] };
@@ -54,13 +55,6 @@ interface BaseMatchedItem extends BaseItem {
   rowid: number;
   guessedExtension?: string | null;
 }
-
-function clearErrors() {
-  const not = $("#notification");
-  not.textContent = "";
-  not.style.display = "none";
-}
-
 
 function matched(item: BaseMatchedItem) {
   return item && item.matched && item.matched !== "unmanual";
@@ -577,7 +571,6 @@ class SelectionTable extends VirtualTable {
     else {
       this.status.textContent = _("numitems.label", [selected]);
     }
-    clearErrors();
   }
 
   getRowClasses(rowid: number) {
@@ -741,10 +734,8 @@ async function download(paused = false) {
     });
   }
   catch (ex) {
-    const not = $("#notification");
     const msg = _(ex.message || ex);
-    not.textContent = msg || ex.message || ex;
-    not.style.display = "block";
+    Toast.error(msg || ex.message || ex);
   }
 }
 
@@ -812,8 +803,8 @@ function cancel() {
 }
 
 async function init() {
-  FastFilter = new Dropdown("#fast", FASTFILTER.values);
-  FastFilter.on("changed", () => {
+  FastFilter = setupDatalist("fast", FASTFILTER.values);
+  FastFilter.onchange(() => {
     PORT.postMessage({
       msg: "fast-filter",
       fastFilter: FastFilter.value

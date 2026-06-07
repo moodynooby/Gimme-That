@@ -41,84 +41,26 @@ body>* {
   color: black !important;
 }
 
-.filter-manual {
-  text-decoration: underline #FFFFB3 solid 3px !important;
-}
+.filter-manual { --f-c: #FFFFB3; --f-c-sel: #FFFF80; }
+.filter-1 { --f-c: #FFE8BB; --f-c-sel: #FFD88A; }
+.filter-2 { --f-c: #ECFFB3; --f-c-sel: #DFFF80; }
+.filter-3 { --f-c: #ECE8FF; --f-c-sel: #D5CCFF; }
+.filter-4 { --f-c: #DDF3FF; --f-c-sel: #C2EAFF; }
+.filter-5 { --f-c: #FDE8FF; --f-c-sel: #FBCCFF; }
+.filter-6 { --f-c: #DDFFF4; --f-c-sel: #A8FFE4; }
+.filter-7 { --f-c: #FEFFAF; --f-c-sel: #FDFF7A; }
+.filter-8 { --f-c: #FFF0B3; --f-c-sel: #FFE680; }
+.filter-fast { --f-c: #FFDBDB; --f-c-sel: #DFC2C2; }
 
-.filter-manual.virtualtable-selected {
-  text-decoration: underline #FFFF80 solid 3px !important;
+[class*=" filter-"]:not(.filter-manual):not(.filter-fast),
+[class^="filter-"]:not(.filter-manual):not(.filter-fast),
+.filter-fast, .filter-manual {
+  text-decoration: underline var(--f-c) solid 3px !important;
 }
-
-.filter-1 {
-  text-decoration: underline #FFE8BB solid 3px !important;
-}
-
-.filter-1.virtualtable-selected {
-  text-decoration: underline #FFD88A solid 3px !important;
-}
-
-.filter-2 {
-  text-decoration: underline #ECFFB3 solid 3px !important;
-}
-
-.filter-2.virtualtable-selected {
-  text-decoration: underline #DFFF80 solid 3px !important;
-}
-
-.filter-3 {
-  text-decoration: underline #ECE8FF solid 3px !important;
-}
-
-.filter-3.virtualtable-selected {
-  text-decoration: underline #D5CCFF solid 3px !important;
-}
-
-.filter-4 {
-  text-decoration: underline #DDF3FF solid 3px !important;
-}
-
-.filter-4.virtualtable-selected {
-  text-decoration: underline #C2EAFF solid 3px !important;
-}
-
-.filter-5 {
-  text-decoration: underline #FDE8FF solid 3px !important;
-}
-
-.filter-5.virtualtable-selected {
-  text-decoration: underline #FBCCFF solid 3px !important;
-}
-
-.filter-6 {
-  text-decoration: underline #DDFFF4 solid 3px !important;
-}
-
-.filter-6.virtualtable-selected {
-  text-decoration: underline #A8FFE4 solid 3px !important;
-}
-
-.filter-7 {
-  text-decoration: underline #FEFFAF solid 3px !important;
-}
-
-.filter-7.virtualtable-selected {
-  text-decoration: underline #FDFF7A solid 3px !important;
-}
-
-.filter-8 {
-  text-decoration: underline #FFF0B3 solid 3px !important;
-}
-
-.filter-8.virtualtable-selected {
-  text-decoration: underline #FFE680 solid 3px !important;
-}
-
-.filter-fast {
-  text-decoration: underline #FFDBDB solid 3px !important;
-}
-
-.filter-fast.virtualtable-selected {
-  text-decoration: underline #DFC2C2 solid 3px !important;
+[class*=" filter-"].virtualtable-selected,
+[class^="filter-"].virtualtable-selected,
+.filter-fast.virtualtable-selected, .filter-manual.virtualtable-selected {
+  text-decoration: underline var(--f-c-sel) solid 3px !important;
 }
 
 #tabs {
@@ -175,6 +117,16 @@ body>* {
   display: none;
   border-radius: 10px;
 }
+
+html.dark .filter-1 { --f-c: #554400; --f-c-sel: #775500; }
+html.dark .filter-2 { --f-c: #3c5500; --f-c-sel: #557700; }
+html.dark .filter-3 { --f-c: #333055; --f-c-sel: #554477; }
+html.dark .filter-4 { --f-c: #003355; --f-c-sel: #004477; }
+html.dark .filter-5 { --f-c: #550033; --f-c-sel: #770044; }
+html.dark .filter-6 { --f-c: #005533; --f-c-sel: #007744; }
+html.dark .filter-7 { --f-c: #555500; --f-c-sel: #777700; }
+html.dark .filter-8 { --f-c: #554400; --f-c-sel: #775500; }
+html.dark .filter-fast { --f-c: #550000; --f-c-sel: #770000; }
 
 #filters {
   display: flex;

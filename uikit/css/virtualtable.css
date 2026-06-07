@@ -1,5 +1,4 @@
 @import 'contextmenu.css';
-@import '/style/common.css';
 
 table.virtualtable {
   color: var(--general-color);
@@ -234,4 +233,10 @@ table.virtualtable-columns {
   50% {
     background-position: 100% 50%;
   }
+}
+
+.virtualtable-row.done .virtualtable-progress-bar,
+.virtualtable-row.canceled .virtualtable-progress-bar,
+.virtualtable-row.missing .virtualtable-progress-bar {
+  animation: none;
 }

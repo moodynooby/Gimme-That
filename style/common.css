@@ -1,6 +1,13 @@
 /* csslint box-sizing: false, ids: false, fallback-colors: false */
 /* License: gpl-v2 */
 
+@font-face {
+  font-family: "downthemall";
+  src: url("downthemall.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --general-color: #333340; /* softer dark for text */
   --general-bgcolor: #f5f6fa; /* very light, cool off-white */
@@ -41,6 +48,12 @@
   --popup-color: #2e2e38;
   --modal-color: #2e2e38;
   --modal-bgcolor: #ffffff;
+  --modal-footer-bgcolor: rgba(30, 30, 30, 0.2);
+  --modal-footer-border: 1px solid rgba(30, 30, 30, 0.5);
+  --btn-add-bgcolor: #43a047;
+  --btn-cancel-bgcolor: #e53935;
+  --btn-resume-bgcolor: #fdd835;
+  --btn-pause-bgcolor: #fb8c00;
 }
 
 html.dark {
@@ -70,6 +83,12 @@ html.dark {
   --general-button-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   --modal-color: #e1e2ec;
   --modal-bgcolor: #2e303f;
+  --modal-footer-bgcolor: rgba(200, 200, 200, 0.1);
+  --modal-footer-border: 1px solid rgba(200, 200, 200, 0.2);
+  --btn-add-bgcolor: #66bb6a;
+  --btn-cancel-bgcolor: #ef5350;
+  --btn-resume-bgcolor: #ffee58;
+  --btn-pause-bgcolor: #ffa726;
   scrollbar-color: #e1e2ec88 #1f202c;
 }
 
@@ -115,6 +134,7 @@ body {
 
   font-variant: normal;
   text-transform: none;
+  font-family: "downthemall", -apple-system, BlinkMacSystemFont, "Segoe UI", "Ubuntu", "Helvetica Neue", sans-serif;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -269,56 +289,6 @@ td.virtualtable {
 }
 #statusPrefs:hover {
   color: var(--status-icon-color-hover);
-}
-
-.dropdown {
-  box-sizing: content-box;
-  font: menu;
-  height: 24px;
-  position: relative;
-}
-
-.dropdown select {
-  box-sizing: border-box;
-  height: 26px;
-  left: 0;
-  margin: 0;
-  outline: none;
-  position: absolute;
-  top: 0;
-  width: 100%;
-}
-
-.dropdown input {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  color: var(--general-input-color);
-  background: var(--general-input-bgcolor);
-  border: none;
-  bottom: 2px;
-  box-sizing: content-box;
-  font-size: 11px;
-  left: 6px;
-  outline: none;
-  padding: 2px;
-  position: absolute;
-  top: 3px;
-}
-
-#notification {
-  display: none;
-  color: var(--general-input-color);
-  background: var(--error-color);
-  margin: 0;
-  padding-top: 1ex;
-  padding-bottom: 1ex;
-}
-
-@supports (not (-moz-appearance: none)) {
-  .dropdown select {
-    background: var(--general-input-bgcolor);
-  }
 }
 
 .context-menu-icon {

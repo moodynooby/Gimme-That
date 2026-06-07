@@ -1,5 +1,4 @@
 /* License: MIT */
-@import '/style/common.css';
 ul.context-menu,
 ul.context-menu ul {
   -webkit-user-select: none;
@@ -31,7 +30,7 @@ ul.context-menu ul {
 
 .context-menu-item:hover:not(.context-menu-separator),
 .context-menu-item:hover:not(.context-menu-separator) > * {
-  background: #2283fb;
+  background: var(--menu-bgcolor-hover);
   color: white !important;
 }
 

@@ -1,7 +1,7 @@
 "use strict";
 // License: MIT
 
-import { EventEmitter } from "../../lib/events";
+import { EventEmitter } from "../../uikit/lib/events";
 import { $ } from "../winutil";
 
 export class Buttons extends EventEmitter {

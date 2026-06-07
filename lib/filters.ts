@@ -5,7 +5,7 @@ import uuid from "./uuid";
 
 import "./objectoverlay";
 import { storage } from "./browser";
-import { EventEmitter } from "./events";
+import { EventEmitter } from "../uikit/lib/events";
 import { TYPE_LINK, TYPE_MEDIA, TYPE_ALL } from "./constants";
 // eslint-disable-next-line no-unused-vars
 import { Overlayable } from "./objectoverlay";

@@ -2,7 +2,7 @@
 // License: MIT
 
 import DEFAULT_PREFS from "../data/prefs.json";
-import { EventEmitter } from "./events";
+import { EventEmitter } from "../uikit/lib/events";
 import { loadOverlay } from "./objectoverlay";
 import { storage } from "./browser";
 

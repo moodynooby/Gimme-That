@@ -12,7 +12,7 @@ import { iconForPath, openUrls } from "../../lib/windowutils";
 import { formatSpeed, formatSize, formatTimeDelta } from "../../lib/formatters";
 import { filters } from "../../lib/filters";
 import { _ } from "../../lib/i18n";
-import { EventEmitter } from "../../lib/events";
+import { EventEmitter } from "../../uikit/lib/events";
 import { Prefs, PrefWatcher } from "../../lib/prefs";
 // eslint-disable-next-line no-unused-vars
 import { debounce, URLd } from "../../lib/util";

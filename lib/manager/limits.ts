@@ -2,7 +2,7 @@
 // License: MIT
 
 import { Prefs } from "../prefs";
-import { EventEmitter } from "../events";
+import { EventEmitter } from "../../uikit/lib/events";
 
 const DEFAULT = {
   concurrent: -1,

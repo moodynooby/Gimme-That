@@ -1,7 +1,7 @@
 "use strict";
 // License: MIT
 
-import { EventEmitter } from "../events";
+import { EventEmitter } from "../../uikit/lib/events";
 import { Notification } from "../notifications";
 import { DB } from "../db";
 import { QUEUED, CANCELED, RUNNING, RETRYING } from "./state";

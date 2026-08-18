@@ -328,8 +328,8 @@
     "description": "menu text"
   },
   "extensionDescription": {
-    "message": "Ο Διαχειριστής Πολλαπλών Λήψεων για τον φυλλομετρητή σας.",
-    "description": "DownThemAll! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one"
+    "message": "Ανακαλύψτε και κατεβάστε τα πάντα από μια σελίδα",
+    "description": "LinkHarvest tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one"
   },
   "fastfiltering": {
     "message": "Γρήγορο Φιλτράρισμα",
@@ -1311,11 +1311,11 @@
   },
   "crawling": {
     "description": "Crawling section header in the select window",
-    "message": "Linked pages"
+    "message": "Συλλογή σελίδας"
   },
   "crawl_links": {
     "description": "Label; enable crawling of linked pages in the select window",
-    "message": "Also crawl linked pages (same site)"
+    "message": "Περιήγηση συνδεδεμένων σελίδων για εύρεση αρχείων και πολυμέσων"
   },
   "crawl_depth": {
     "description": "Label; maximum recursion depth for crawling",
@@ -1331,15 +1331,15 @@
   },
   "crawl_start": {
     "description": "Button text; start crawling linked pages",
-    "message": "Crawl"
+    "message": "Συλλογή"
   },
   "crawl_running": {
     "description": "Button text; crawling in progress",
-    "message": "Crawling\u2026"
+    "message": "Συλλογή...\u2026"
   },
   "crawl_done": {
     "description": "Toast text; crawl finished",
-    "message": "Found $LINKS$ new links and $MEDIA$ new media items on $PAGES$ pages",
+    "message": "Η συλλογή ολοκληρώθηκε: Βρέθηκαν $LINKS$ νέοι σύνδεσμοι και $MEDIA$ νέα πολυμέσα σε $PAGES$ σελίδες",
     "placeholders": {
       "pages": {
         "content": "$1",
@@ -1355,20 +1355,48 @@
       }
     }
   },
+  "menu_harvest_section": {
+    "description": "Section header for harvest actions in popup",
+    "message": "Συλλογή Ιστού"
+  },
+  "menu_download_section": {
+    "description": "Section header for download actions in popup",
+    "message": "Λήψη Σελίδας"
+  },
+  "pref_harvest_section": {
+    "description": "Fieldset legend in preferences for harvest settings",
+    "message": "🌱 Συλλογή Ιστού"
+  },
+  "pref_crawl_depth": {
+    "description": "Label for crawl depth setting",
+    "message": "Βάθος συλλογής (προεπιλογή):"
+  },
+  "pref_crawl_max_pages": {
+    "description": "Label for max pages setting",
+    "message": "Μέγιστες σελίδες (προεπιλογή):"
+  },
+  "pref_crawl_extensions": {
+    "description": "Label for crawl extensions setting",
+    "message": "Τύποι αρχείων:"
+  },
+  "harvest_description": {
+    "description": "Helper text for harvest section in select window",
+    "message": "Περιηγηθείτε σε συνδέσμους ίδιου ιστοτόπου για να βρείτε αρχεία και μέσα που θα μπορούσατε να χάσετε σε αυτήν τη σελίδα μόνο"
+  },
   "crawl_nothing": {
     "description": "Toast text; crawl found nothing new",
     "message": "Nothing new found on linked pages"
   },
   "crawl_failed": {
     "description": "Toast text; crawl failed",
-    "message": "Crawling failed"
+    "message": "Η συλλογή απέτυχε"
   },
   "dta_crawl": {
     "description": "Menu text; crawl linked pages and open the download window",
-    "message": "Fetch linked pages"
+    "message": "Συλλογή συνδεδεμένων σελίδων"
   },
   "dta_crawl_turbo": {
     "description": "Menu text; crawl linked pages and download immediately",
-    "message": "Fetch linked pages now"
+    "message": "Συλλογή & λήψη τώρα"
   }
 }

@@ -9,51 +9,63 @@
 }
 
 :root {
-  --general-color: #333340; /* softer dark for text */
-  --general-bgcolor: #f5f6fa; /* very light, cool off-white */
-  --general-border-color: #d1d4db; /* subtle cool gray */
-  --general-input-color: #2e2e38; /* dark slate */
-  --general-input-bgcolor: #ffffff; /* clean white */
-  --general-button-color: #2e2e38; /* consistent dark for text */
-  --general-button-bgcolor: #e6e8f0; /* subtle pale lavender-blue */
-  --general-button-bgcolor-hover: #cbd0e0; /* gentle hover shade */
-  --general-button-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* soft shadow */
-  --menu-bgcolor: #ffffff; /* crisp white */
-  --menu-bgcolor-hover: #4a76f6; /* bright modern blue */
-  --table-bgcolor: #ffffff; /* clean white table */
-  --table-head-bgcolor: #f1f3f9; /* subtle pale background for headers */
-  --toolbar-bg-color: #3867d6; /* modern blue */
-  --toolbar-active-border-color: #5977e9; /* lighter border highlight */
-  --toolbar-hover-border-color: #2a78f4; /* bright blue on hover border */
-  --toolbar-hover-background: #4e81ffcc; /* translucent bright blue */
+  --general-color: #2d3142;
+  --general-bgcolor: #f8f9fc;
+  --general-border-color: #e1e5ee;
+  --general-input-color: #2d3142;
+  --general-input-bgcolor: #ffffff;
+  --general-button-color: #2d3142;
+  --general-button-bgcolor: #edf0f7;
+  --general-button-bgcolor-hover: #d4dae8;
+  --general-button-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --menu-bgcolor: #ffffff;
+  --menu-bgcolor-hover: #3a8f46;
+  --table-bgcolor: #ffffff;
+  --table-head-bgcolor: #f0f3f9;
+  --toolbar-bg-color: #3a8f46;
+  --toolbar-active-border-color: #4da65a;
+  --toolbar-hover-border-color: #2d7a38;
+  --toolbar-hover-background: rgba(58, 143, 70, 0.15);
   --toolbar-border-width: 2px;
-  --toolbar-border: 1px solid #a3aedc; /* soft border */
-  --add-color: #4a90e2; /* modern soft blue */
-  --queue-color: #9aa0ac; /* muted gray for inactive */
-  --pause-color: #f5a623; /* warm amber */
-  --retry-color: #3578e5; /* rich blue */
-  --error-color: #e94f4f; /* vivid but modern red */
-  --running-color: #a8d5ba; /* muted green */
-  --finishing-color: #6abd89; /* fresh green */
-  --done-color: #3a8f46; /* solid green */
-  --force-color: #2d6a2d; /* darker green */
-  --folder-color: #f0c419; /* vibrant gold */
-  --maskbutton-color: #f5b700; /* warm yellow */
-  --missing-color: #3578e5; /* bright blue for missing */
-  --open-color: #f5b700cc; /* translucent warm yellow */
-  --status-icon-color: #555770; /* softer dark gray */
-  --status-icon-color-hover: #7b7d92; /* medium gray hover */
-  --file-icon-image-color: #3b6ecb; /* friendly blue */
+  --toolbar-border: 1px solid #c5d4c8;
+  --add-color: #3a8f46;
+  --queue-color: #9aa0ac;
+  --pause-color: #f5a623;
+  --retry-color: #3578e5;
+  --error-color: #e74c3c;
+  --running-color: #27ae60;
+  --finishing-color: #2ecc71;
+  --done-color: #3a8f46;
+  --force-color: #2d6a2d;
+  --folder-color: #f1c40f;
+  --maskbutton-color: #f39c12;
+  --missing-color: #3498db;
+  --open-color: rgba(241, 196, 15, 0.8);
+  --status-icon-color: #555770;
+  --status-icon-color-hover: #7b7d92;
+  --file-icon-image-color: #3498db;
   --popup-bgcolor: #ffffff;
-  --popup-color: #2e2e38;
-  --modal-color: #2e2e38;
+  --popup-color: #2d3142;
+  --modal-color: #2d3142;
   --modal-bgcolor: #ffffff;
-  --modal-footer-bgcolor: rgba(30, 30, 30, 0.2);
-  --modal-footer-border: 1px solid rgba(30, 30, 30, 0.5);
-  --btn-add-bgcolor: #43a047;
-  --btn-cancel-bgcolor: #e53935;
-  --btn-resume-bgcolor: #fdd835;
-  --btn-pause-bgcolor: #fb8c00;
+  --modal-footer-bgcolor: rgba(30, 30, 30, 0.15);
+  --modal-footer-border: 1px solid rgba(30, 30, 30, 0.4);
+  --btn-add-bgcolor: #3a8f46;
+  --btn-cancel-bgcolor: #e74c3c;
+  --btn-resume-bgcolor: #f1c40f;
+  --btn-pause-bgcolor: #f39c12;
+  --harvest-primary: #3a8f46;
+  --harvest-secondary: #f1c40f;
+  --harvest-gradient: linear-gradient(135deg, #3a8f46 0%, #2d7a38 100%);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
 }
 
 html.dark {
@@ -92,13 +104,26 @@ html.dark {
   scrollbar-color: #e1e2ec88 #1f202c;
 }
 
-button{
-  border-radius: 5px;
+button {
+  border-radius: var(--radius-sm);
   background: var(--general-button-bgcolor);
   color: var(--general-button-color);
+  border: 1px solid var(--general-border-color);
+  padding: 6px 14px;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
 }
-button:hover{
+
+button:hover {
   background: var(--general-button-bgcolor-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 html.dark a {
   color: lightblue;

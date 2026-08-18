@@ -83,6 +83,21 @@
       <!--<label><input type="radio" name="pref-conflict-action" value="prompt"> <span data-i18n="conflict-prompt">Prompt</span></label>-->
     </fieldset>
     <fieldset>
+      <legend data-i18n="pref-harvest-section">🌱 Site Harvest</legend>
+      <label>
+        <span data-i18n="pref-crawl-depth">Crawl depth (default):</span>
+        <input id="pref-crawl-depth" type="number" min="1" max="10" value="2">
+      </label>
+      <label>
+        <span data-i18n="pref-crawl-max-pages">Max pages (default):</span>
+        <input id="pref-crawl-max-pages" type="number" min="1" max="1000" value="50">
+      </label>
+      <label>
+        <span data-i18n="pref-crawl-extensions">File extensions:</span>
+        <input id="pref-crawl-extensions" type="text" spellcheck="false" value="">
+      </label>
+    </fieldset>
+    <fieldset>
       <legend>Translations</legend>
       <label>
         <span>Language:</span>

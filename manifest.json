@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "Gimme That!",
-  "version": "5.7",
+  "name": "LinkHarvest",
+  "version": "6.0",
   "description": "__MSG_extensionDescription__",
   "author": "Manas",
   "default_locale": "en",
@@ -36,7 +36,7 @@
       "32": "style/icon32.png",
       "128": "style/icon128.png"
     },
-    "default_title": "Gimme That!"
+    "default_title": "LinkHarvest"
   },
   "options_ui": {
     "open_in_tab": true,

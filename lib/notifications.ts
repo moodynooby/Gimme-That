@@ -8,7 +8,7 @@ import {EventEmitter} from "../uikit/lib/events";
 const DEFAULTS = {
   type: "basic",
   iconUrl: runtime.getURL("/style/icon128.png"),
-  title: "Gimme That!",
+  title: "LinkHarvest",
   message: "message",
 };
 
@@ -25,7 +25,7 @@ export class Notification extends EventEmitter {
     super();
 
     this.generated = !id;
-    id = id || `Gimme That!-notification${++gid}`;
+    id = id || `LinkHarvest-notification${++gid}`;
     if (typeof options === "string") {
       options = {message: options};
     }

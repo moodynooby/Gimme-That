@@ -15,12 +15,15 @@ body {
 
 article {
   margin: 1em;
+  padding: 16px;
 }
 
 #tabs {
   display: flex;
-  padding-left: calc(2em + 32px);
-  color: var(--general-bgcolor);
+  padding: 12px 24px;
+  gap: 8px;
+  background: var(--general-bgcolor);
+  border-bottom: 1px solid var(--general-border-color);
 }
 
 input.tab {
@@ -28,18 +31,32 @@ input.tab {
 }
 
 #tabs > label {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   cursor: pointer;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 1ex 1em;
-  border-top: 2px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 18px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  color: var(--general-color);
+  letter-spacing: 0.2px;
 }
+
+#tabs > label:hover:not(:checked) {
+  background: var(--toolbar-hover-background);
+  color: var(--harvest-primary);
+}
+
 /* Style for iframe container */
 .iframe-container {
   width: 100%;
   height: 100%;
   min-height: 500px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 /* Style for the iframe itself */
@@ -49,6 +66,7 @@ input.tab {
   border: none;
   overflow: auto;
 }
+
 .tab {
   display: none;
   flex-direction: column;
@@ -71,31 +89,16 @@ input.tab {
 #tabsel-general:checked ~ #tabs #tabel-general,
 #tabsel-network:checked ~ #tabs #tabel-network,
 #tabsel-filters:checked ~ #tabs #tabel-filters {
-  color: var(--general-color) !important;
-  background: var(--general-bgcolor);
-  border: var(--toolbar-border-width) solid
-    var(--toolbar-active-border-color);
-    border-radius: 10px;
-  margin-top: 0.5em;
+  color: var(--harvest-primary) !important;
+  background: rgba(58, 143, 70, 0.08);
+  border: 2px solid var(--harvest-primary);
+  border-radius: var(--radius-sm);
 }
 
 #tabs > label {
-  transition: border-color 1s;
-  border: var(--toolbar-border-width) solid
-  var(--toolbar-border-color);
-  margin-top: 0.5em;
+  transition: all var(--transition-fast);
+  border: 2px solid transparent;
   color: var(--general-color);
-  border-radius: 10px;
-
-}
-
-#tabs > label:hover:not(:checked) {
-  border: var(--toolbar-border-width) solid
-    var(--toolbar-hover-border-color);
-  background: var(--toolbar-hover-background);
-  margin-top: 0.5em;
-  border-radius: 10px;
-
 }
 
 #tab-filters {
@@ -140,18 +143,30 @@ input.tab {
 
 fieldset {
   display: flex;
-  margin-bottom: 1em;
+  margin-bottom: 1.2em;
   border: 1px solid var(--general-border-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   flex-direction: column;
   max-width: 60em;
   padding: 1.2em;
+  background: white;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal);
+}
+
+fieldset:hover {
+  box-shadow: var(--shadow-md);
+}
+
+html.dark fieldset {
+  background: var(--general-bgcolor);
 }
 
 .optiongroups,
 fieldset > label {
   display: flex;
   align-items: center;
+  padding: 6px 0;
 }
 
 fieldset > label > input,
@@ -161,8 +176,43 @@ fieldset > label > select {
 }
 
 legend {
-  font-weight: bold;
-  font-size: 120%;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--harvest-primary);
+  padding: 0 8px;
+  letter-spacing: 0.3px;
+}
+
+/* Input styling */
+input[type="text"],
+input[type="number"] {
+  padding: 6px 10px;
+  border: 1px solid var(--general-border-color);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: var(--harvest-primary);
+  box-shadow: 0 0 0 3px rgba(58, 143, 70, 0.15);
+}
+
+select {
+  padding: 6px 10px;
+  border: 1px solid var(--general-border-color);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  background: white;
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--harvest-primary);
+  box-shadow: 0 0 0 3px rgba(58, 143, 70, 0.15);
 }
 
 #tab-network {

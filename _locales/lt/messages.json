@@ -328,8 +328,8 @@
     "description": "menu text"
   },
   "extensionDescription": {
-    "message": "Masinio parsisiuntimo programa jūsų naršyklėje",
-    "description": "DownThemAll! tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one"
+    "message": "Atraskite ir atsisiųskite viską tinklalapyje",
+    "description": "LinkHarvest tagline, displayed in about:addons; Please do NOT refer to a specific browser such as firefox, as we will probably support more than one"
   },
   "fastfiltering": {
     "message": "Greitas filtravimas",
@@ -1311,7 +1311,7 @@
   },
   "crawling": {
     "description": "Crawling section header in the select window",
-    "message": "Linked pages"
+    "message": "Svetainės surinkimas"
   },
   "crawl_links": {
     "description": "Label; enable crawling of linked pages in the select window",
@@ -1331,15 +1331,15 @@
   },
   "crawl_start": {
     "description": "Button text; start crawling linked pages",
-    "message": "Crawl"
+    "message": "Surinkti"
   },
   "crawl_running": {
     "description": "Button text; crawling in progress",
-    "message": "Crawling\u2026"
+    "message": "Surinkama\u2026"
   },
   "crawl_done": {
     "description": "Toast text; crawl finished",
-    "message": "Found $LINKS$ new links and $MEDIA$ new media items on $PAGES$ pages",
+    "message": "Rasta $LINKS$ naujų nuorodų ir $MEDIA$ naujų medijos elementų $PAGES$ puslapiuose",
     "placeholders": {
       "pages": {
         "content": "$1",
@@ -1355,20 +1355,48 @@
       }
     }
   },
+  "menu_harvest_section": {
+    "description": "Section header for harvest actions in popup",
+    "message": "Svetainės surinkimas"
+  },
+  "menu_download_section": {
+    "description": "Section header for download actions in popup",
+    "message": "Puslapio atsisiuntimas"
+  },
+  "pref_harvest_section": {
+    "description": "Fieldset legend in preferences for harvest settings",
+    "message": "🌱 Svetainės surinkimas"
+  },
+  "pref_crawl_depth": {
+    "description": "Label for crawl depth setting",
+    "message": "Surinkimo gylis (numatytasis):"
+  },
+  "pref_crawl_max_pages": {
+    "description": "Label for max pages setting",
+    "message": "Maks. puslapiai (numatytasis):"
+  },
+  "pref_crawl_extensions": {
+    "description": "Label for crawl extensions setting",
+    "message": "Failų tipai:"
+  },
+  "harvest_description": {
+    "description": "Helper text for harvest section in select window",
+    "message": "Naršykite tos pačios svetainės nuorodas, kad rastumėte failus ir mediją, kurių galbūt nepastebėtumėte šiame puslapyje"
+  },
   "crawl_nothing": {
     "description": "Toast text; crawl found nothing new",
     "message": "Nothing new found on linked pages"
   },
   "crawl_failed": {
     "description": "Toast text; crawl failed",
-    "message": "Crawling failed"
+    "message": "Surinkimas nepavyko"
   },
   "dta_crawl": {
     "description": "Menu text; crawl linked pages and open the download window",
-    "message": "Fetch linked pages"
+    "message": "Surinkti susietus puslapius"
   },
   "dta_crawl_turbo": {
     "description": "Menu text; crawl linked pages and download immediately",
-    "message": "Fetch linked pages now"
+    "message": "Surinkti ir atsisiųsti dabar"
   }
 }

@@ -195,25 +195,77 @@ html.dark .filter-fast { --f-c: #550000; --f-c-sel: #770000; }
   font-weight: bold;
 }
 
-#crawl {
+#crawl.harvest-section {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  column-gap: 1em;
-  row-gap: 0.5ex;
-  margin-right: 1em;
-  padding-top: 1ex;
+  column-gap: 1.2em;
+  row-gap: 0.8ex;
+  margin: 0 1em 1em 1em;
+  padding: 1.2em;
+  border: 2px solid var(--harvest-primary);
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, rgba(58, 143, 70, 0.08) 0%, rgba(58, 143, 70, 0.02) 100%);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
 }
 
-#crawl h2 {
+#crawl.harvest-section:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--harvest-primary);
+}
+
+#crawl.harvest-section h2 {
   flex-basis: 100%;
   margin: 0;
-  font-size: 100%;
+  font-size: 115%;
+  color: var(--harvest-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+#crawl.harvest-section h2::before {
+  content: '🌱';
+  font-size: 1.3em;
+}
+
+.harvest-description {
+  flex-basis: 100%;
+  margin: 0 0 0.6em 0;
+  font-size: 92%;
+  color: #5a5f72;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+html.dark .harvest-description {
+  color: #a0a5b8;
 }
 
 #crawl label {
   display: flex;
   align-items: center;
+  gap: 0.5em;
+  padding: 4px 0;
+}
+
+#crawl input[type="number"],
+#crawl input[type="text"] {
+  padding: 6px 10px;
+  border: 1px solid var(--general-border-color);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+#crawl input[type="number"]:focus,
+#crawl input[type="text"]:focus {
+  outline: none;
+  border-color: var(--harvest-primary);
+  box-shadow: 0 0 0 3px rgba(58, 143, 70, 0.15);
 }
 
 #crawl input[type="number"] {
@@ -226,4 +278,110 @@ html.dark .filter-fast { --f-c: #550000; --f-c-sel: #770000; }
 
 #crawlControls[hidden] {
   display: none;
+}
+
+#btnCrawl {
+  background: var(--harvest-gradient);
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+  letter-spacing: 0.3px;
+}
+
+#btnCrawl:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  filter: brightness(1.05);
+}
+
+#btnCrawl:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Tabs styling */
+#tabs {
+  margin: 0;
+  padding: 8px 16px 0 16px;
+  color: var(--general-color);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-items: start;
+  gap: 4px;
+}
+
+#tabs .spacer {
+  flex-grow: 1;
+}
+
+#tabs [class^="icon"]:before {
+  padding-right: 0.5em;
+}
+
+.tab {
+  -webkit-user-select: none;
+  user-select: none;
+  color: var(--general-color);
+  min-width: 10em;
+  padding: 10px 16px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 8px 8px 0 0;
+  transition: all var(--transition-fast);
+  background: transparent;
+}
+
+.tab:not(.active):not(.disabled):hover {
+  background: var(--toolbar-hover-background);
+  color: var(--harvest-primary);
+}
+
+.tab.active {
+  color: var(--harvest-primary);
+  border-bottom: 2px solid var(--harvest-primary);
+  background: rgba(58, 143, 70, 0.05);
+}
+
+.tab.disabled {
+  color: #aab;
+  border: 2px solid #dde;
+  display: none;
+}
+
+/* Buttons section */
+#buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--general-bgcolor);
+  border-top: 1px solid var(--general-border-color);
+}
+
+#btnDownload {
+  background: var(--harvest-gradient);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-weight: 600;
+}
+
+#btnDownload:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Status bar */
+#status {
+  padding: 8px 16px;
+  border-top: 1px solid var(--general-border-color);
+  background: var(--general-bgcolor);
 }

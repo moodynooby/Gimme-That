@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <style>
     html {
-      box-sizing: content-box !important;
+      box-sizing: border-box !important;
     }
 
     html, body {
@@ -14,49 +14,74 @@
       -webkit-user-select: none;
       user-select: none;
       margin: 0;
-      padding: 0;
+      padding: 8px 0;
     }
 
     ul {
-      margin: 1.5ex;
-      margin-right: 2ex;
-      padding: 0;
+      margin: 0;
+      padding: 0 8px;
       display: grid;
       grid-template-columns: auto;
       list-style-type: none;
-      min-width: 14em;
+      min-width: 220px;
     }
 
     li {
       display: flex;
       margin: 0;
-      padding: 1ex;
-      font-size: 110%;
-      vertical-align: center;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 500;
       align-items: center;
-      border-radius: 4px;
-      cursor: default;
+      border-radius: 8px;
+      cursor: pointer;
       white-space: nowrap;
+      transition: all 0.15s ease;
+      letter-spacing: 0.2px;
     }
 
     li.sep {
-      display: inline-block;
-      padding: 0;
+      display: block;
+      padding: 4px 14px;
+      cursor: default;
+    }
+
+    li.sep hr {
+      border: none;
+      border-top: 1px solid var(--general-border-color);
+      margin: 4px 0;
     }
 
     li:not(.sep):hover {
-      background: Highlight;
-      color: HighlightText;
+      background: var(--menu-bgcolor-hover);
+      color: white;
+      transform: translateX(2px);
+    }
+
+    li:not(.sep):active {
+      transform: translateX(0);
     }
 
     li>.icon,
     li>img {
       font-size: 16px;
       line-height: 16px;
-      margin-right: 1ex;
+      margin-right: 10px;
       width: 16px;
       height: 16px;
       object-fit: contain;
+    }
+
+    /* Harvest actions - special styling */
+    #crawl, #crawl-turbo {
+      background: linear-gradient(135deg, rgba(58, 143, 70, 0.08) 0%, rgba(58, 143, 70, 0.02) 100%);
+      border-left: 3px solid var(--harvest-primary);
+      margin-bottom: 2px;
+    }
+
+    #crawl:hover, #crawl-turbo:hover {
+      background: var(--harvest-primary);
+      color: white;
     }
 
     #single:not(:hover)>.icon-add {
@@ -73,6 +98,15 @@
 
 <body>
   <ul>
+    <li id="crawl" data-action="do-crawl">
+      <span data-i18n="dta.crawl"></span>
+    </li>
+    <li id="crawl-turbo" data-action="do-crawl-turbo">
+      <span data-i18n="dta.crawl-turbo"></span>
+    </li>
+    <li class="sep">
+      <hr>
+    </li>
     <li id="regular" data-action="do-regular">
       <span data-i18n="dta.regular"></span>
     </li>
@@ -85,17 +119,8 @@
     <li id="regular-all" data-action="do-regular-all">
       <span data-i18n="dta-regular-all"></span>
     </li>
-    <li id="turbo" data-action="do-turbo-all">
+    <li id="turbo-all" data-action="do-turbo-all">
       <span data-i18n="dta-turbo-all"></span>
-    </li>
-    <li class="sep">
-      <hr>
-    </li>
-    <li id="crawl" data-action="do-crawl">
-      <span data-i18n="dta.crawl"></span>
-    </li>
-    <li id="crawl-turbo" data-action="do-crawl-turbo">
-      <span data-i18n="dta.crawl-turbo"></span>
     </li>
     <li class="sep">
       <hr>

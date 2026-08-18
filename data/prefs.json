@@ -21,5 +21,8 @@
 			"domain": "*",
 			"concurrent": -1
 		}
-	]
+	],
+	"crawl-depth": 2,
+	"crawl-max-pages": 100,
+	"crawl-extensions": "7z, aac, apk, avi, bmp, bz2, csv, deb, dmg, doc, docx, epub, exe, flac, gif, gz, ico, iso, jpeg, jpg, json, m4a, mkv, mobi, mov, mp3, mp4, msi, ogg, odp, ods, odt, pdf, pkg, png, ppt, pptx, rar, rpm, svg, tar, txt, wav, webm, webp, wmv, xls, xlsx, xz, zip"
 }

@@ -27,6 +27,9 @@ import {
 import { Bus } from "./bus";
 import { filterInSitu } from "./util";
 import { DB } from "./db";
+import { crawl, parseExtensions } from "./crawler";
+import { Notification } from "./notifications";
+import DEFAULT_PREFS from "../data/prefs.json";
 
 
 const menus = typeof (_menus) !== "undefined" && _menus || _cmenus;
@@ -276,6 +279,55 @@ locale.then(() => {
       });
     }
 
+    async crawlLinkedPages(tab: Tab, turbo: boolean) {
+      try {
+        const textLinks = await Prefs.get("text-links", true);
+        const gatherOptions = {
+          type: "DTA:gather",
+          selectionOnly: false,
+          textLinks,
+          schemes: Array.from(ALLOWED_SCHEMES.values()),
+          transferable: TRANSFERABLE_PROPERTIES,
+        };
+        const results = await runContentJob(tab, GATHER, gatherOptions);
+        const links = this.makeUnique(results, "links");
+        const media = this.makeUnique(results, "media");
+        const seeds = links.concat(media);
+        const depth = parseInt(
+          await Prefs.get("crawl-depth", DEFAULT_PREFS["crawl-depth"]), 10) ||
+          2;
+        const maxPages = parseInt(
+          await Prefs.get(
+            "crawl-max-pages", DEFAULT_PREFS["crawl-max-pages"]), 10) ||
+          100;
+        const extPref = String(await Prefs.get(
+          "crawl-extensions", DEFAULT_PREFS["crawl-extensions"]));
+        const extensions = parseExtensions(extPref);
+        const result = await crawl(
+          seeds, seeds, {depth, maxPages, extensions});
+        const allLinks = makeUniqueItems([links, result.links]);
+        const allMedia = makeUniqueItems([media, result.media]);
+        if (turbo) {
+          await API.turbo(allLinks, allMedia);
+        }
+        else {
+          await API.regular(allLinks, allMedia);
+        }
+      }
+      catch (ex) {
+        console.error("Crawl failed", ex);
+        new Notification(null, _("crawl.failed"));
+      }
+    }
+
+    async onClickedDTACrawl(info: MenuClickInfo, tab: Tab) {
+      return await this.crawlLinkedPages(tab, false);
+    }
+
+    async onClickedDTACrawlTurbo(info: MenuClickInfo, tab: Tab) {
+      return await this.crawlLinkedPages(tab, true);
+    }
+
     async onClickedDTARegularLink(info: MenuClickInfo, tab: Tab) {
       if (!info.linkUrl) {
         return;
@@ -379,6 +431,8 @@ locale.then(() => {
   Bus.on("do-regular-all", () => menuHandler.emulate("DTARegularAll"));
   Bus.on("do-turbo", () => menuHandler.emulate("DTATurbo"));
   Bus.on("do-turbo-all", () => menuHandler.emulate("DTATurboAll"));
+  Bus.on("do-crawl", () => menuHandler.emulate("DTACrawl"));
+  Bus.on("do-crawl-turbo", () => menuHandler.emulate("DTACrawlTurbo"));
   Bus.on("do-single", () => API.singleRegular(null));
   Bus.on("open-manager", () => openManager(true));
   Bus.on("open-prefs", () => openPrefs());

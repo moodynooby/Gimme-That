@@ -1,0 +1,4 @@
+nodeLinker: hoisted
+allowBuilds:
+  core-js-pure: true
+  spawn-sync: true

@@ -24,14 +24,14 @@ Gimme That! !’s philosophy: **Less is more. The core features you need, nothin
 
 ### Requirements
 *   [node](https://nodejs.org/en/)
-*   [yarn](https://yarnpkg.com/)
+*   [pnpm](https://pnpm.io/)
 *   [python3](https://www.python.org/) ≥ 3.6 (for zip builds)
 *   [web-ext](https://www.npmjs.com/package/web-ext) (if developing in Firefox)
 
 ### Installation
 Install dependencies first with:
 ```bash
-yarn
+pnpm install
 ```
 
 ### Making Changes
@@ -41,18 +41,18 @@ yarn watch
 ```
 For a one-time build, use:
 ```bash
-yarn build
+pnpm build
 ```
 
 ### Running in Firefox
 Install `web-ext` separately (not as a dependency). Then, run:
 ```bash
-yarn webext
+pnpm webext
 ```
 This uses a separate Firefox profile in `../GT.p` and automatically reloads the extension upon changes.
 For unsigned builds, run:
 ```bash
-yarn build`
+pnpm build`
 Then install the generated zip into Firefox Nightly or Unbranded builds.
 
 ### Running in Chrome/Chromium
@@ -63,7 +63,7 @@ After building:
 ### Making Release Zips
 Create unsigned zips for all browsers with:
 ```bash
-yarn build
+pnpm build
 ```
 For official release mode:
 ```bash

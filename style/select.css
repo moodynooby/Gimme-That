@@ -194,3 +194,36 @@ html.dark .filter-fast { --f-c: #550000; --f-c-sel: #770000; }
 #btnDownload {
   font-weight: bold;
 }
+
+#crawl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 1em;
+  row-gap: 0.5ex;
+  margin-right: 1em;
+  padding-top: 1ex;
+}
+
+#crawl h2 {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 100%;
+}
+
+#crawl label {
+  display: flex;
+  align-items: center;
+}
+
+#crawl input[type="number"] {
+  width: 5em;
+}
+
+#crawl input[type="text"] {
+  width: 24em;
+}
+
+#crawlControls[hidden] {
+  display: none;
+}

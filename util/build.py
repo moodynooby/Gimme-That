@@ -30,9 +30,9 @@ PERM_IGNORED_FX = set(("downloads.shelf", "webRequest", "webRequestBlocking"))
 PERM_IGNORED_CHROME = set(("menus", "sessions", "theme"))
 
 SCRIPTS = [
-  "yarn build:cleanup",
-  "yarn build:regexps",
-  "yarn build:bundles",
+  "pnpm build:cleanup",
+  "pnpm build:regexps",
+  "pnpm build:bundles",
 ]
 
 

@@ -68,8 +68,48 @@
             </label>
             <label>
                 <input type="checkbox" id="fastOnceCheck" />
-                <span data-i18n="useonlyonce">Use only once</span>
+                <span data-i18n="useonlyonce">Just this once</span>
             </label>
+        </section>
+        <section id="crawl">
+            <h2 data-i18n="crawling">Linked pages</h2>
+            <label id="crawlToggle">
+                <input type="checkbox" id="crawlEnabled" checked />
+                <span data-i18n="crawl-links"
+                    >Also crawl linked pages (same site)</span
+                >
+            </label>
+            <div id="crawlControls">
+                <label>
+                    <span data-i18n="crawl-depth">How many pages deep</span>
+                    <input
+                        type="number"
+                        id="crawlDepth"
+                        min="1"
+                        max="10"
+                        step="1"
+                    />
+                </label>
+                <label>
+                    <span data-i18n="crawl-pages">Pages to check</span>
+                    <input
+                        type="number"
+                        id="crawlMaxPages"
+                        min="1"
+                        max="1000"
+                        step="1"
+                    />
+                </label>
+                <label id="crawlExt">
+                    <span data-i18n="crawl-extensions">File types</span>
+                    <input
+                        type="text"
+                        id="crawlExtensions"
+                        spellcheck="false"
+                    />
+                </label>
+                <button id="btnCrawl" data-i18n="crawl.start">Crawl</button>
+            </div>
         </section>
         <section id="buttons">
             <button id="btnDownload" data-i18n="download.verb">Download</button>

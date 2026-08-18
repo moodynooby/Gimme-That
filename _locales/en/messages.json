@@ -117,7 +117,7 @@
   },
   "colConnections": {
     "description": "Table column in prefs/network",
-    "message": "Concurrent Connections"
+    "message": "Connections"
   },
   "colDomain": {
     "description": "Table column in manager",
@@ -261,51 +261,51 @@
   },
   "dta_regular": {
     "description": "Regular dta action; Menu text",
-    "message": "Get"
+    "message": "Download"
   },
   "dta_regular_all": {
     "description": "Menu text",
-    "message": "Get All Tabs"
+    "message": "Download all tabs"
   },
   "dta_regular_image": {
     "description": "Menu text",
-    "message": "Get Image"
+    "message": "Download Image"
   },
   "dta_regular_link": {
     "description": "Menu text",
-    "message": "Get Link"
+    "message": "Download Link"
   },
   "dta_regular_media": {
     "description": "Menu text",
-    "message": "Get Media"
+    "message": "Download Media"
   },
   "dta_regular_selection": {
     "description": "Menu text",
-    "message": "Get Selection"
+    "message": "Download Selection"
   },
   "dta_turbo": {
     "description": "One Click! action; Menu text",
-    "message": "GRAB"
+    "message": "Download now"
   },
   "dta_turbo_all": {
     "description": "Menu text",
-    "message": "GRAB All Tabs"
+    "message": "Download all tabs now"
   },
   "dta_turbo_image": {
     "description": "Menu text",
-    "message": "GRAB Image"
+    "message": "Download Image Now"
   },
   "dta_turbo_link": {
     "description": "Menu text",
-    "message": "GRAB Link"
+    "message": "Download Link Now"
   },
   "dta_turbo_media": {
     "description": "Menu text",
-    "message": "GRAB Media"
+    "message": "Download Media Now"
   },
   "dta_turbo_selection": {
     "description": "Menu text",
-    "message": "GRAB Selection"
+    "message": "Download Selection Now"
   },
   "error_invalidMask": {
     "description": "Error message; single/select window",
@@ -357,7 +357,7 @@
   },
   "fastfilter_placeholder": {
     "description": "Placeholder for fastfilter inputs",
-    "message": "Wildcard expression or regular expression"
+    "message": "Pattern such as *.pdf, or a regular expression"
   },
   "fastfiltering": {
     "description": "Label for Fast Filtering input",
@@ -373,11 +373,11 @@
   },
   "filter_expression": {
     "description": "Message box label",
-    "message": "Filter-Expression"
+    "message": "Expression"
   },
   "filter_label": {
     "description": "Message box label",
-    "message": "Filter-Label"
+    "message": "Label"
   },
   "filter_type_link": {
     "description": "Message box checkbox label",
@@ -389,7 +389,7 @@
   },
   "filter_types": {
     "description": "Message box label",
-    "message": "Filter-Types"
+    "message": "Types"
   },
   "finishing": {
     "description": "Status text",
@@ -589,7 +589,7 @@
   },
   "pref_button_type_dta": {
     "description": "label",
-    "message": "Download selection"
+    "message": "Open download window"
   },
   "pref_button_type_manager": {
     "description": "label",
@@ -597,11 +597,11 @@
   },
   "pref_button_type_popup": {
     "description": "label",
-    "message": "Popup menu"
+    "message": "Open popup menu"
   },
   "pref_button_type_turbo": {
     "description": "label",
-    "message": "GRAB Quickly!"
+    "message": "Download immediately"
   },
   "pref_concurrent_downloads": {
     "description": "Preferences/Network",
@@ -649,11 +649,11 @@
   },
   "pref_retries": {
     "description": "pref text",
-    "message": "Number of retries of downloads on temporary errors"
+    "message": "Retries on temporary errors"
   },
   "pref_retry_time": {
     "description": "pref text",
-    "message": "Retry every (in minutes)"
+    "message": "Retry every (minutes)"
   },
   "pref_show_urls": {
     "description": "Preferences/General",
@@ -731,7 +731,7 @@
   },
   "remove_all_complete_downloads": {
     "description": "Menu text",
-    "message": "Remove All Complete"
+    "message": "Remove All Completed"
   },
   "remove_all_downloads": {
     "description": "Menu text",
@@ -773,7 +773,7 @@
   },
   "remove_domain_complete_downloads": {
     "description": "Menu text",
-    "message": "Remove Complete From Current Domain"
+    "message": "Remove All Completed From This Domain"
   },
   "remove_domain_complete_downloads_question": {
     "description": "Messagebox text",
@@ -787,7 +787,7 @@
   },
   "remove_domain_downloads": {
     "description": "Menu text",
-    "message": "Remove Current Domain"
+    "message": "Remove All From This Domain"
   },
   "remove_domain_downloads_question": {
     "description": "Messagebox text",
@@ -835,11 +835,11 @@
   },
   "remove_missing": {
     "description": "Menu text",
-    "message": "Clear Missing Downloads"
+    "message": "Clear Missing Files"
   },
   "remove_missing_downloads_question": {
     "description": "Messagebox text",
-    "message": "Do you want to clear all missing downloads?"
+    "message": "Do you want to clear all downloads whose files are missing?"
   },
   "remove_paused_downloads": {
     "description": "Menu text",
@@ -1309,6 +1309,68 @@
   },
   "useonlyonce": {
     "description": "Label for Use-Once checkboxes",
-    "message": "Use Once"
+    "message": "Just this once"
+  },
+  "crawling": {
+    "description": "Crawling section header in the select window",
+    "message": "Linked pages"
+  },
+  "crawl_links": {
+    "description": "Label; enable crawling of linked pages in the select window",
+    "message": "Also crawl linked pages (same site)"
+  },
+  "crawl_depth": {
+    "description": "Label; maximum recursion depth for crawling",
+    "message": "How many pages deep"
+  },
+  "crawl_pages": {
+    "description": "Label; maximum number of pages to crawl",
+    "message": "Pages to check"
+  },
+  "crawl_extensions": {
+    "description": "Label; file extensions treated as downloads when crawling",
+    "message": "File types (comma-separated)"
+  },
+  "crawl_start": {
+    "description": "Button text; start crawling linked pages",
+    "message": "Crawl"
+  },
+  "crawl_running": {
+    "description": "Button text; crawling in progress",
+    "message": "Crawling\u2026"
+  },
+  "crawl_done": {
+    "description": "Toast text; crawl finished",
+    "message": "Found $LINKS$ new links and $MEDIA$ new media items on $PAGES$ pages",
+    "placeholders": {
+      "pages": {
+        "content": "$1",
+        "example": "10"
+      },
+      "links": {
+        "content": "$2",
+        "example": "10"
+      },
+      "media": {
+        "content": "$3",
+        "example": "50"
+      }
+    }
+  },
+  "crawl_nothing": {
+    "description": "Toast text; crawl found nothing new",
+    "message": "Nothing new found on linked pages"
+  },
+  "crawl_failed": {
+    "description": "Toast text; crawl failed",
+    "message": "Crawling failed"
+  },
+  "dta_crawl": {
+    "description": "Menu text; crawl linked pages and open the download window",
+    "message": "Fetch linked pages"
+  },
+  "dta_crawl_turbo": {
+    "description": "Menu text; crawl linked pages and download immediately",
+    "message": "Fetch linked pages now"
   }
 }

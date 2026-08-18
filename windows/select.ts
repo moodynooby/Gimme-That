@@ -26,6 +26,7 @@ import { ItemDelta } from "../lib/select";
 // eslint-disable-next-line no-unused-vars
 import { TableConfig } from "../uikit/lib/config";
 import { parsePath } from "../lib/util";
+import DEFAULT_PREFS from "../data/prefs.json";
 import "./theme";
 
 const PORT: RawPort = runtime.connect(null, { name: "select" });
@@ -50,7 +51,6 @@ let FastFilter: ReturnType<typeof setupDatalist>;
 type DELTAS = { deltaLinks: ItemDelta[]; deltaMedia: ItemDelta[] };
 
 interface BaseMatchedItem extends BaseItem {
-  backIdx: number;
   matched?: string | null;
   rowid: number;
   guessedExtension?: string | null;
@@ -126,19 +126,23 @@ class CheckClasser extends Map<string, string> {
 type KeyFn = (item: BaseMatchedItem) => any;
 
 class ItemCollection {
-  private items: BaseMatchedItem[];
+  public items: BaseMatchedItem[];
 
   private indexes: Map<number, BaseMatchedItem>;
 
   constructor(items: BaseMatchedItem[]) {
     this.items = items;
     this.assignRows();
-    this.items.forEach((item, idx) => item.backIdx = idx);
     this.indexes = new Map(items.map((i, idx) => [idx, i]));
   }
 
   assignRows() {
     this.items.forEach((item, idx) => item.rowid = idx);
+  }
+
+  append(items: BaseMatchedItem[]) {
+    this.items.push(...items);
+    this.assignRows();
   }
 
   get length() {
@@ -150,16 +154,6 @@ class ItemCollection {
     this.items.forEach(function (item, idx) {
       if (item.matched && item.matched !== "unmanual") {
         rv.push(idx);
-      }
-    });
-    return rv;
-  }
-
-  get checkedBackIndexes() {
-    const rv: number[] = [];
-    this.items.forEach(function (item) {
-      if (item.matched && item.matched !== "unmanual") {
-        rv.push(item.backIdx);
       }
     });
     return rv;
@@ -550,6 +544,59 @@ class SelectionTable extends VirtualTable {
     this.updateStatus();
   }
 
+  updateTabs() {
+    const hook = (tab: HTMLElement, count: number, type: string) => {
+      if (!count) {
+        return;
+      }
+      const wasDisabled = tab.classList.contains("disabled");
+      tab.classList.remove("disabled");
+      if (wasDisabled) {
+        tab.addEventListener("click", this.switchTab.bind(this, type));
+      }
+    };
+    hook(this.linksTab, this.links.length, "links");
+    hook(this.mediaTab, this.media.length, "media");
+  }
+
+  addCrawlResults(results: {links: any[]; media: any[]}) {
+    const merge = (collection: ItemCollection, incoming: any[]) => {
+      const known = new Map<string, BaseMatchedItem>();
+      for (const item of collection.items) {
+        known.set(item.url, item);
+      }
+      const fresh: BaseMatchedItem[] = [];
+      for (const raw of incoming) {
+        if (!raw || !raw.url) {
+          continue;
+        }
+        const other = known.get(raw.url);
+        if (other) {
+          if (!other.title && raw.title) {
+            other.title = raw.title;
+          }
+          if (!other.description && raw.description) {
+            other.description = raw.description;
+          }
+          continue;
+        }
+        const item = Object.assign({}, raw, {matched: null}) as BaseMatchedItem;
+        known.set(item.url, item);
+        fresh.push(item);
+      }
+      collection.append(fresh);
+      return fresh.length;
+    };
+    const addedLinks = merge(this.links, results.links);
+    const addedMedia = merge(this.media, results.media);
+    if (addedLinks + addedMedia) {
+      this.updateTabs();
+      this.invalidate();
+      this.updateStatus();
+    }
+    return {addedLinks, addedMedia};
+  }
+
   switchTab(type: string) {
     this.type = type;
     const isLinks = type === "links";
@@ -699,7 +746,19 @@ class SelectionTable extends VirtualTable {
 
 async function download(paused = false) {
   try {
-    const items = Table.items.checkedBackIndexes;
+    const items = Table.items.checked.map(idx => {
+      const item = Table.items.at(idx);
+      return {
+        url: item.url,
+        title: item.title,
+        fileName: item.fileName,
+        description: item.description,
+        referrer: item.referrer,
+        usableReferrer: item.usableReferrer,
+        private: item.private,
+        mask: item.mask,
+      };
+    });
     if (!items.length) {
       throw new Error("error.noItemsSelected");
     }
@@ -802,6 +861,26 @@ function cancel() {
   return true;
 }
 
+function startCrawl() {
+  const btn = $<HTMLButtonElement>("#btnCrawl");
+  if (btn.disabled) {
+    return;
+  }
+  const depth = parseInt($<HTMLInputElement>("#crawlDepth").value, 10) || 3;
+  const maxPages =
+    parseInt($<HTMLInputElement>("#crawlMaxPages").value, 10) || 100;
+  btn.disabled = true;
+  btn.textContent = _("crawl.running");
+  PORT.postMessage({
+    msg: "crawl",
+    data: {
+      depth,
+      maxPages,
+      extensions: $<HTMLInputElement>("#crawlExtensions").value,
+    },
+  });
+}
+
 async function init() {
   FastFilter = setupDatalist("fast", FASTFILTER.values);
   FastFilter.onchange(() => {
@@ -809,6 +888,26 @@ async function init() {
       msg: "fast-filter",
       fastFilter: FastFilter.value
     });
+  });
+
+  const crawlDepth = $<HTMLInputElement>("#crawlDepth");
+  const crawlPages = $<HTMLInputElement>("#crawlMaxPages");
+  const crawlExts = $<HTMLInputElement>("#crawlExtensions");
+  crawlDepth.value = String(parseInt(
+    await Prefs.get("crawl-depth", DEFAULT_PREFS["crawl-depth"]), 10) || 2);
+  crawlPages.value = String(parseInt(
+    await Prefs.get(
+      "crawl-max-pages", DEFAULT_PREFS["crawl-max-pages"]), 10) || 100);
+  crawlExts.value = await Prefs.get(
+    "crawl-extensions", DEFAULT_PREFS["crawl-extensions"]);
+  crawlDepth.addEventListener("change", () => {
+    Prefs.set("crawl-depth", crawlDepth.value);
+  });
+  crawlPages.addEventListener("change", () => {
+    Prefs.set("crawl-max-pages", crawlPages.value);
+  });
+  crawlExts.addEventListener("change", () => {
+    Prefs.set("crawl-extensions", crawlExts.value);
   });
 }
 
@@ -843,6 +942,11 @@ addEventListener("DOMContentLoaded", function dom() {
       fast: $<HTMLInputElement>("#fastDisableOthers").checked
     });
   });
+  $("#btnCrawl").addEventListener("click", startCrawl);
+  $<HTMLInputElement>("#crawlEnabled").addEventListener("change", () => {
+    const enabled = $<HTMLInputElement>("#crawlEnabled").checked;
+    $("#crawlControls").hidden = !enabled;
+  });
 
   Keys.on("Enter", "Return", () => {
     download(false);
@@ -876,6 +980,33 @@ addEventListener("DOMContentLoaded", function dom() {
             Table.applyDeltas(msg.data);
           });
           return;
+
+        case "crawl-results": {
+          const {links = [], media = [], pages = 0, error} = msg.data;
+          const btn = $<HTMLButtonElement>("#btnCrawl");
+          btn.disabled = false;
+          btn.textContent = _("crawl.start");
+          requestAnimationFrame(() => {
+            if (!Table) {
+              return;
+            }
+            const {addedLinks, addedMedia} = Table.addCrawlResults({
+              links,
+              media,
+            });
+            if (error) {
+              Toast.error(_("crawl.failed"));
+            }
+            else if (!addedLinks && !addedMedia) {
+              Toast.info(_("crawl.nothing"));
+            }
+            else {
+              Toast.success(
+                _("crawl.done", [pages, addedLinks, addedMedia]));
+            }
+          });
+          return;
+        }
 
         default:
           throw Error("Unhandled message");

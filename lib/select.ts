@@ -9,6 +9,7 @@ import { Promised, timeout } from "./util";
 import { filters, FAST, Filter } from "./filters";
 import { WindowStateTracker } from "./windowstatetracker";
 import { windows, CHROME } from "./browser";
+import { crawl, parseExtensions } from "./crawler";
 // eslint-disable-next-line no-unused-vars
 import { BaseItem } from "./item";
 
@@ -162,6 +163,33 @@ export async function select(links: BaseItem[], media: BaseItem[]) {
       done.resolve(msg);
     });
 
+    port.on("crawl", async (msg: any) => {
+      const {
+        depth = 2,
+        maxPages = 100,
+        extensions = "",
+      } = msg.data || {};
+      const extList = parseExtensions(extensions);
+      try {
+        const seeds = links.concat(media);
+        const result = await crawl(seeds, seeds, {
+          depth,
+          maxPages,
+          extensions: extList,
+        });
+        port.post("crawl-results", result);
+      }
+      catch (ex) {
+        console.error("Crawl failed", ex);
+        port.post("crawl-results", {
+          links: [],
+          media: [],
+          pages: 0,
+          error: String(ex && ex.message || ex),
+        });
+      }
+    });
+
     port.on("filter-changed", (spec: any) => {
       overrides.set(spec.id, spec.value);
       sendFilters(true);
@@ -193,10 +221,7 @@ export async function select(links: BaseItem[], media: BaseItem[]) {
       const type = await Prefs.get("last-type", "links");
       port.post("items", {type, links, media});
       const {items, options} = await done;
-      const selectedIndexes = new Set<number>(items);
-      const selectedList = (options.type === "links" ? links : media);
-      const selectedItems = selectedList.filter(
-        (item: BaseItem, idx: number) => selectedIndexes.has(idx));
+      const selectedItems = items as BaseItem[];
       for (const [filter, override] of overrides) {
         const f = fm.get(filter);
         if (f) {
